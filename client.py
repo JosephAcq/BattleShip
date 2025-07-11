@@ -1,6 +1,6 @@
 import socket
 
-host = 'localhost'  # or localhost for testing
+host = 'localhost' 
 port = 5050             # ngrok-assigned port
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

@@ -1,4 +1,19 @@
 import socket
+import threading
+# BOOT UP SERVER.PY THEN CLIENT.PY IN SEPERATE TERMINALS TO AFFIRM CONNECTION
+
+#Code to send and receive messages, end using Ctrl+C
+def handle_receive(conn):
+    while True:
+        data = conn.recv(1024)
+        if not data:
+            break
+        print("\nClient:", data.decode())
+
+def handle_send(conn):
+    while True:
+        msg = input("You: ")
+        conn.sendall(msg.encode())
 
 print("Starting server.py")
 
@@ -10,11 +25,7 @@ print("Waiting for connection...")
 conn, addr = server_socket.accept()
 print("Connected by", addr)
 
-while True:
-    data = conn.recv(1024)
-    if not data:
-        break
-    print("Received:", data.decode())
-    conn.sendall(b'ACK')
+threading.Thread(target=handle_receive, args=(conn,), daemon=True).start()
+handle_send(conn)
 
 conn.close()

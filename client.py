@@ -2,15 +2,34 @@ from board import Board
 import socket
 import threading
 
+your_turn = False  # Lock until server gives turn
+
+
 def handle_receive(client_socket):
+    global your_turn
     while True:
         data = client_socket.recv(1024)
         if not data:
             break
+
+        message = data.decode()
         print("\nServer:", data.decode())
 
+        if message == "Your turn":
+            your_turn = TRUE
+        elif message == "Wait, other player's turn is active":
+            your_turn = FALSE
+
 def handle_send(client_socket):
+    global your_turn
     while True:
+        if your_turn:
+            msg = input("Enter your attack(EX: 2 4): ")
+            client_socket.sendall(msg.encode)) #Socket only takes in bytes so this converts the user's input into bytes and then sends to socket.
+            your_turn = False 
+        else:
+            pass
+            
         msg = input("You: ")
         client_socket.sendall(msg.encode())
 

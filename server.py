@@ -1,3 +1,4 @@
+from board import Board
 import socket
 import threading
 # BOOT UP SERVER.PY THEN CLIENT.PY IN SEPERATE TERMINALS TO AFFIRM CONNECTION

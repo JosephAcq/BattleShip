@@ -4,17 +4,31 @@ import threading
 # BOOT UP SERVER.PY THEN CLIENT.PY IN SEPERATE TERMINALS TO AFFIRM CONNECTION
 
 #Code to send and receive messages, end using Ctrl+C
+
+turn = "Player 1(host)"  
+
 def handle_receive(conn):
+    global turn
     while True:
         data = conn.recv(1024)
         if not data:
             break
-        print("\nClient:", data.decode())
+        msg = data.decode()
+        print("\nClient guessed: ", msg)
+        
+        turn = "server"     # After client's move, server's turn
+        conn.sendall("WAIT".encode())
 
 def handle_send(conn):
+    global turn
     while True:
-        msg = input("You: ")
-        conn.sendall(msg.encode())
+        if turn == "server":
+            msg = input("Enter your attack(EX: 2 4): ")
+            conn.sendall(msg.encode())
+            your_turn = FALSE
+        else:
+            pass
+            
 
 print("Starting server.py")
 

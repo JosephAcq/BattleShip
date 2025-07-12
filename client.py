@@ -1,3 +1,4 @@
+from board import Board
 import socket
 import threading
 

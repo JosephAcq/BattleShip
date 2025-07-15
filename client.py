@@ -24,11 +24,12 @@ def handle_send(client_socket):
     global your_turn
     while True:
         if your_turn:
-            msg = input("Enter your attack(EX: 2 4): ")
-            client_socket.sendall(msg.encode()) #Socket only takes in bytes so this converts the user's input into bytes and then sends to socket.
-            your_turn = False 
+            msg = input("Enter your attack (ex: 2 4): ")
+            client_socket.sendall(msg.encode())
+            your_turn = False  # Lock your turn until server replies
         else:
-            pass
+            continue  # Just wait until it's your turn again
+
             
         #msg = input("You: ")
         #client_socket.sendall(msg.encode())

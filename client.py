@@ -4,7 +4,6 @@ import threading
 
 your_turn = False  # Lock until server gives turn
 
-
 def handle_receive(client_socket):
     global your_turn
     while True:
@@ -13,26 +12,22 @@ def handle_receive(client_socket):
             break
 
         message = data.decode()
-        print("\nServer:", data.decode())
+        print("\nServer:", message)
 
         if message == "Your turn":
             your_turn = True
         elif message == "WAIT":
             your_turn = False
 
-def handle_send(conn):
-    global turn
+def handle_send(client_socket):
+    global your_turn
     while True:
-        if turn == "server":
+        if your_turn:
             msg = input("Enter your attack (ex: 2 4): ")
-            conn.sendall(msg.encode())
-            turn = "client"  # Pass turn to client
+            client_socket.sendall(msg.encode())
+            your_turn = False
         else:
-            continue  # Wait for your turn
-
-            
-        #msg = input("You: ")
-        #client_socket.sendall(msg.encode())
+            continue
 
 # DO NOT REMOVE CODE UNDERNEATH-- CRUCIAL TO CONNECTION
 host = 'localhost' 

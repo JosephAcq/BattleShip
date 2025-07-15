@@ -25,13 +25,13 @@ def handle_send(client_socket):
     while True:
         if your_turn:
             msg = input("Enter your attack(EX: 2 4): ")
-            client_socket.sendall(msg.encode)) #Socket only takes in bytes so this converts the user's input into bytes and then sends to socket.
+            client_socket.sendall(msg.encode()) #Socket only takes in bytes so this converts the user's input into bytes and then sends to socket.
             your_turn = False 
         else:
             pass
             
-        msg = input("You: ")
-        client_socket.sendall(msg.encode())
+        #msg = input("You: ")
+        #client_socket.sendall(msg.encode())
 
 # DO NOT REMOVE CODE UNDERNEATH-- CRUCIAL TO CONNECTION
 host = 'localhost' 

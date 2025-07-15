@@ -39,6 +39,15 @@ conn, addr = server_socket.accept()
 
 print("Connected by", addr)
 
+# Start the game by telling server it's their turn
+turn = "server"  # or "client" depending on who should go first
+
+if turn == "client":
+    conn.sendall("Your turn".encode())
+else:
+    print("Your turn to attack!")
+
+
 threading.Thread(target=handle_receive, args=(conn,), daemon=True).start()
 handle_send(conn)
 

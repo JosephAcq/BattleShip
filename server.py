@@ -25,7 +25,7 @@ def handle_send(conn):
         if turn == "server":
             msg = input("Enter your attack(EX: 2 4): ")
             conn.sendall(msg.encode())
-            your_turn = False
+            #your_turn = False
         else:
             pass
             

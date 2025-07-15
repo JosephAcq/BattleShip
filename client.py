@@ -16,7 +16,7 @@ def handle_receive(client_socket):
         print("\nServer:", data.decode())
 
         if message == "Your turn":
-            your_turn = TRUE
+            your_turn = True
         elif message == "WAIT":
             your_turn = False
 

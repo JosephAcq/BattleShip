@@ -17,7 +17,7 @@ def handle_receive(client_socket):
 
         if message == "Your turn":
             your_turn = TRUE
-        elif message == "Wait, other player's turn is active":
+        elif message == "WAIT":
             your_turn = False
 
 def handle_send(client_socket):

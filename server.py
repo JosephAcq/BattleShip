@@ -1,11 +1,8 @@
 from board import Board
 import socket
 import threading
-# BOOT UP SERVER.PY THEN CLIENT.PY IN SEPERATE TERMINALS TO AFFIRM CONNECTION
 
-#Code to send and receive messages, end using Ctrl+C
-
-turn = "Player 1(host)"  
+turn = "server"  # Server starts first
 
 def handle_receive(conn):
     global turn
@@ -14,23 +11,21 @@ def handle_receive(conn):
         if not data:
             break
         msg = data.decode()
-        print("\nClient guessed: ", msg)
-        
-        turn = "server"     # After client's move, server's turn
-        conn.sendall("WAIT".encode())
+        print("\nClient guessed:", msg)
+
+        # After client's move, it's the server's turn
+        turn = "server"
+        conn.sendall("WAIT".encode())  # Lock client
 
 def handle_send(conn):
     global turn
     while True:
         if turn == "server":
-            msg = input("Enter your attack(EX: 2 4): ")
-            print("You attacked:", msg)
+            msg = input("Enter your attack (ex: 2 4): ")
             conn.sendall(msg.encode())
-            turn = "client"
-            #your_turn = False
+            turn = "client"  # Now it's client's turn
         else:
-            pass
-            
+            continue
 
 print("Starting server.py")
 

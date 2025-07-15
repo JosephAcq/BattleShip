@@ -20,15 +20,15 @@ def handle_receive(client_socket):
         elif message == "WAIT":
             your_turn = False
 
-def handle_send(client_socket):
-    global your_turn
+def handle_send(conn):
+    global turn
     while True:
-        if your_turn:
+        if turn == "server":
             msg = input("Enter your attack (ex: 2 4): ")
-            client_socket.sendall(msg.encode())
-            your_turn = False  # Lock your turn until server replies
+            conn.sendall(msg.encode())
+            turn = "client"  # Pass turn to client
         else:
-            continue  # Just wait until it's your turn again
+            continue  # Wait for your turn
 
             
         #msg = input("You: ")

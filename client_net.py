@@ -30,8 +30,8 @@ def handle_send(client_socket):
             continue
 
 # DO NOT REMOVE CODE UNDERNEATH-- CRUCIAL TO CONNECTION
-host = '4.tcp.ngrok.io' 
-port = 14087
+host = '6.tcp.ngrok.io' 
+port = 12335
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect((host, port))
 # UP TO HERE
